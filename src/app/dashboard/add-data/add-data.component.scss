@@ -1,50 +1,94 @@
 
+@import '~bootstrap/dist/css/bootstrap.css';
+
 form {
-    width: 50%;
-    background-color: whitesmoke;
-    margin: 0 auto;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 50px;
-}
+  width: 50%;
+  background-color: whitesmoke;
+  margin: 0 auto;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
 
-form label {
-    display: block;
-    font-size: 1.2em;
-    color: darkslategrey;
-    padding-left: 3px;    
-}
-
-input, select
-{
-    font-size: 1.1em; 
-    color: grey;
-    background-color: white;
-    padding: 10px;
-    font-family: inherit;
-    font-weight: lighter;
-    border: 0px;
-    outline: none;
-    border-radius: 0.3em;
+  mat-form-field {
+    width: 100%;
     margin-bottom: 20px;
-    width: 50%;
-}
 
-input:focus { 
-    border:1px solid orange;
-}
+    input, mat-select {
+      font-size: 1.1em;
+      color: grey;
+      background-color: white;
+      padding: 10px;
+      font-family: inherit;
+      font-weight: lighter;
+      border: 1px solid #ccc;
+      border-radius: 0.3em;
+      width: calc(100% - 20px);
+      margin: 10px;
 
-input[type=submit] {
-    background-color: limegreen;
-    cursor: pointer;
-    width: 14em;
+      &:focus {
+        border: 1px solid orange;
+      }
+    }
+
+    mat-label {
+      color: darkslategrey;
+      font-size: 1.2em;
+      padding-left: 3px;
+    }
+
+    mat-error {
+      color: red;
+      font-size: 0.8em;
+      margin-top: 4px;
+    }
+
+    mat-select {
+      width: calc(100% - 20px);
+      margin: 10px;
+    }
+  }
+
+  button {
+    width: calc(100% - 20px);
+    max-width: 14em;
     padding: .3em 0;
     border-radius: 0.7em;
+    margin: 10px;
+  }
+
+  button.active {
+    background-color: #FF5722; 
+    color: white;
+  }
+
+  button {
+    margin-right: 5px;
+    background-color: #2196F3; 
+    color: white;
+
+    &:hover {
+      background-color: #64B5F6; 
+    }
+  }
+
+
 }
 
-input[type=submit]:hover {
-    background-color: yellow;
-    box-shadow: 2px 2px 2px grey;
+toast-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.toast {
+  max-width: 400px; /* Adjust the max-width as needed */
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000; /* Adjust the z-index as needed */
 }

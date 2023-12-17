@@ -1,11 +1,49 @@
+<div class="d-flex justify-content-center align-items-center ">
+  <div *ngIf="showToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="mr-auto">Erfolgreich </strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" (click)="showToast = false">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      Anmeldung erfolgreich!
+    </div>
+  </div>
+</div>
+
 <form [formGroup]="addChildForm" (ngSubmit)="onSubmit()">
     <h2>Ihr Kind anmelden!</h2>
-    <input placeholder="Name" type="input" formControlName="name"><br />
-    <input placeholder="Geburtsdatum" type="date" formControlName="birthDate"><br />
-    <select formControlName="kindergardenId">
-        <option value="" disabled>Bitte auswählen</option>
-        <option *ngFor="let kindergarden of storeService.kindergardens" [ngValue]="kindergarden.id">
-            {{kindergarden.name}}, {{kindergarden.address}}</option>
-    </select>
-    <button type="submit">Erfassen</button>
-</form>
+  
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error *ngIf="addChildForm.get('name').hasError('required')">Bitte geben Sie einen Namen ein.</mat-error>
+      <mat-error *ngIf="addChildForm.get('name').hasError('maxlength')">Der Name darf maximal 50 Zeichen lang sein.</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+  <mat-label>Geburtsdatum</mat-label>
+  <input matInput type="date" placeholder="Geburtsdatum" formControlName="birthDate">
+  <mat-error *ngIf="addChildForm.get('birthDate').hasError('required')">Geburtsdatum wird benötigt!</mat-error>
+  <mat-error *ngIf="addChildForm.get('birthDate').hasError('ageRange')">Das Kind muss zwischen 3 und 10 Jahre alt sein.</mat-error>
+</mat-form-field>
+
+  
+    <mat-form-field appearance="fill">
+        <mat-label>Kindergarten</mat-label>
+        <mat-select formControlName="kindergardenId">
+          <mat-option value="" disabled>Bitte auswählen</mat-option>
+          <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
+            {{kindergarden.name}}, {{kindergarden.address}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="addChildForm.get('kindergardenId').hasError('required')">Kindergarten bitte auswählen.</mat-error>
+      </mat-form-field>
+      
+  
+    <button mat-raised-button type="submit">Erfassen</button>
+  </form>
+  
+  
+  

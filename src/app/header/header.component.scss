@@ -1,3 +1,13 @@
-.flex {
-    display: flex;
+/* styles.css oder deine Styles-Datei */
+mat-toolbar {
+  height: 64px; /* Passe die Höhe nach Bedarf an */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden
+}
+
+
+mat-menu {
+  margin-top: 64px; /* Verhindert, dass das Menü das Bild überlappt */
 }

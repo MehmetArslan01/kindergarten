@@ -47,7 +47,6 @@ export class DataComponent implements OnInit {
 
   public cancelRegistration(childId: string) {
     this.backendService.deleteChildData(childId, this.currentPage);
+    this.backendService.getChildren(this.currentPage);
   }
 }
-
-

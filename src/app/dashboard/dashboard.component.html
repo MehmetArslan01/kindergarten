@@ -1,4 +1,6 @@
-<app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"></app-data>
-<br>
-<app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
-<app-add-data *ngIf="showAddData" [currentPage]="currentPage"></app-add-data>
+<mat-card>
+    <app-data [currentPage]="currentPage" (selectPageEvent)="receiveMessage($event)"></app-data>
+    <br>
+    <app-button [showAddData]="showAddData" (toggleButtonClickEvent)="toggleButtonClicked($event)"></app-button>
+    <app-add-data *ngIf="showAddData" [currentPage]="currentPage"></app-add-data>
+</mat-card>

@@ -1,6 +1,16 @@
-<div class="flex">
-    <h1>{{ title }}</h1>
-    <img width="500" src={{imagePath}}>&nbsp;&nbsp;
-    <a [routerLink]="['/dashboard']">Dashboard</a>&nbsp;&nbsp;
-    <a [routerLink]="['/about']">About</a>
-</div>
+<!-- header.component.html -->
+<mat-toolbar class="flex">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <div class="toolbar-content">
+    <img width="100%" [src]="imagePath" alt="Kindergarten Image">
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <h1 mat-menu-item>{{ title }}</h1>
+    <button mat-menu-item [routerLink]="['/dashboard']">Dashboard</button>
+    <button mat-menu-item [routerLink]="['/about']">About</button>
+  </mat-menu>
+</mat-toolbar>
