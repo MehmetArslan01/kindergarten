@@ -22,6 +22,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+
 
 
 
@@ -57,7 +60,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatGridListModule,
     MatCardModule,
     MatDatepickerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
 
 
 

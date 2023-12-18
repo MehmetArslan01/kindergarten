@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BackendService } from 'src/app/shared/backend.service';
 import { CHILDREN_PER_PAGE } from 'src/app/shared/constants';
 import { StoreService } from 'src/app/shared/store.service';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-data',
@@ -9,14 +10,22 @@ import { StoreService } from 'src/app/shared/store.service';
   styleUrls: ['./data.component.scss']
 })
 export class DataComponent implements OnInit {
-
-  constructor(public storeService: StoreService, private backendService: BackendService) {}
   @Input() currentPage!: number;
   @Output() selectPageEvent = new EventEmitter<number>();
   public page: number = 0;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(public storeService: StoreService, private backendService: BackendService) {}
+
   ngOnInit(): void {
     this.backendService.getChildren(this.currentPage);
+  }
+
+  ngAfterViewInit() {
+    this.paginator.page.subscribe((event) => {
+      this.selectPage(event.pageIndex + 1);
+    });
   }
 
   getAge(birthDate: string) {
@@ -25,14 +34,14 @@ export class DataComponent implements OnInit {
     var age = today.getFullYear() - birthDateTimestamp.getFullYear();
     var m = today.getMonth() - birthDateTimestamp.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDateTimestamp.getDate())) {
-        age--;
+      age--;
     }
     return age;
   }
 
   selectPage(i: any) {
     let currentPage = i;
-    this.selectPageEvent.emit(currentPage)
+    this.selectPageEvent.emit(currentPage);
     this.backendService.getChildren(currentPage);
   }
 

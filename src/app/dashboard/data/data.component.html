@@ -1,33 +1,34 @@
 <div class="container">
-    <div class="mat-h4 mat-elevation-z2 row justify-content-center align-items-center">
-      <mat-grid-list cols="6" rowHeight="2:1">
-        <mat-grid-tile> Name </mat-grid-tile>
-        <mat-grid-tile> Kindergarten </mat-grid-tile>
-        <mat-grid-tile> Adresse </mat-grid-tile>
-        <mat-grid-tile> Alter </mat-grid-tile>
-        <mat-grid-tile> Geburtsdatum </mat-grid-tile>
-        <mat-grid-tile> </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-  
-    <div *ngFor="let child of storeService.children" class="mat-elevation-z1 row justify-content-center align-items-center">
-      <mat-grid-list cols="6" rowHeight="2:1">
-        <mat-grid-tile> {{child.name}} </mat-grid-tile>
-        <mat-grid-tile> {{child.kindergarden.name}} </mat-grid-tile>
-        <mat-grid-tile> {{child.kindergarden.address}} </mat-grid-tile>
-        <mat-grid-tile> {{getAge(child.birthDate)}} </mat-grid-tile>
-        <mat-grid-tile> {{child.birthDate | date:'longDate'}} </mat-grid-tile>
-        <mat-grid-tile>
-          <button mat-raised-button color="warn" (click)="cancelRegistration(child.id)">
-            Kind abmelden
-          </button>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
-  
- <div class="col-12 d-flex justify-content-center">
-  <button mat-raised-button color="primary" [ngClass]="page == currentPage ? 'active' : ''" (click)="selectPage(page)" type="button"
-    *ngFor="let page of returnAllPages()">
-    {{ page }}
-  </button>
+  <div class="mat-h4 mat-elevation-z2 row justify-content-center align-items-center">
+    <mat-grid-list cols="6" rowHeight="2:1">
+      <mat-grid-tile> Name </mat-grid-tile>
+      <mat-grid-tile> Kindergarten </mat-grid-tile>
+      <mat-grid-tile> Adresse </mat-grid-tile>
+      <mat-grid-tile> Alter </mat-grid-tile>
+      <mat-grid-tile> Geburtsdatum </mat-grid-tile>
+      <mat-grid-tile> </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <div *ngFor="let child of storeService.children" class="mat-elevation-z1 row justify-content-center align-items-center">
+    <mat-grid-list cols="6" rowHeight="2:1">
+      <mat-grid-tile> {{child.name}} </mat-grid-tile>
+      <mat-grid-tile> {{child.kindergarden.name}} </mat-grid-tile>
+      <mat-grid-tile> {{child.kindergarden.address}} </mat-grid-tile>
+      <mat-grid-tile> {{getAge(child.birthDate)}} </mat-grid-tile>
+      <mat-grid-tile> {{child.birthDate | date:'longDate'}} </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-raised-button color="warn" (click)="cancelRegistration(child.id)">
+          Kind abmelden
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+  <mat-paginator
+    [length]="storeService.childrenTotalCount"
+    [pageSize]="2"
+    [pageIndex]="currentPage - 1"
+    (page)="selectPage($event.pageIndex + 1)"
+  ></mat-paginator>
 </div>

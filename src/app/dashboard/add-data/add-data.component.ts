@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { BackendService } from 'src/app/shared/backend.service';
 import { StoreService } from 'src/app/shared/store.service';
-
 
 @Component({
   selector: 'app-add-data',
@@ -22,33 +21,28 @@ export class AddDataComponent implements OnInit {
     this.addChildForm = this.formbuilder.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       kindergardenId: ['', [Validators.required]],
-      birthDate: [null, [Validators.required, this.ageRangeValidator(3, 10)]]
+      birthDate: [null, [Validators.required, Validators.min(this.calculateMinAge()), Validators.max(this.calculateMaxAge())]]
     });
   }
 
- onSubmit() {
+  calculateMinAge(): number {
+    const today = new Date();
+    return today.getFullYear() - 10; // Mindestalter als numerischer Wert
+  }
+
+  calculateMaxAge(): number {
+    const today = new Date();
+    return today.getFullYear() - 3; // Höchstalter als numerischer Wert
+  }
+
+  onSubmit() {
     if (this.addChildForm.valid) {
       this.backendService.addChildData(this.addChildForm.value, this.currentPage);
-      this.showToast = true; // Show the Bootstrap Toast
+      this.showToast = true;
       setTimeout(() => {
-        this.showToast = false; // Hide the Toast after a delay (e.g., 3000 milliseconds)
+        this.showToast = false;
       }, 3000);
     }
-  }
-  ageRangeValidator(min: number, max: number) {
-    return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (control.value) {
-        const birthDate = new Date(control.value);
-        const today = new Date();
-        const age = today.getFullYear() - birthDate.getFullYear();
-
-        if (age < min || age > max) {
-          return { 'ageRange': true };
-        }
-      }
-
-      return null;
-    };
   }
 
   setErrorMessages(controlName: string, errorMessages: { [key: string]: string }): void {
