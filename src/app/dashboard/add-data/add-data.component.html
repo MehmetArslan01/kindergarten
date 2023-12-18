@@ -27,16 +27,15 @@
       <input matInput type="date" placeholder="Geburtsdatum" formControlName="birthDate">
       <mat-error *ngIf="addChildForm.get('birthDate').hasError('required')">Geburtsdatum wird benötigt!</mat-error>
       <mat-error *ngIf="addChildForm.get('birthDate').hasError('min')">
-        Das Kind darf höchstens 10 Jahre alt sein.
+        Das Kind darf frühestens im Jahr {{ calculateMinAge() + 1 }} geboren sein.
       </mat-error>
       <mat-error *ngIf="addChildForm.get('birthDate').hasError('max')">
-        Das Kind muss mindestens 3 Jahre alt sein.
+        Das Kind darf spätestens im Jahr {{ calculateMaxAge() }} geboren sein.
       </mat-error>
     </mat-form-field>
     
     
     
-
   
     <mat-form-field appearance="fill">
         <mat-label>Kindergarten</mat-label>

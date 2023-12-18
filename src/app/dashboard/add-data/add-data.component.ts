@@ -27,12 +27,12 @@ export class AddDataComponent implements OnInit {
 
   calculateMinAge(): number {
     const today = new Date();
-    return today.getFullYear() - 10; // Mindestalter als numerischer Wert
+    return today.getFullYear() - 10; 
   }
 
   calculateMaxAge(): number {
     const today = new Date();
-    return today.getFullYear() - 3; // Höchstalter als numerischer Wert
+    return today.getFullYear() - 3; 
   }
 
   onSubmit() {
