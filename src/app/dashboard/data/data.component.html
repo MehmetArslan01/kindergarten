@@ -1,3 +1,17 @@
+<div class="d-flex justify-content-center align-items-center ">
+  <div *ngIf="showToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="mr-auto">Erfolgreich </strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close" (click)="showToast = false">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      Kind erfolgreich abgemeldet!
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="mat-h4 mat-elevation-z2 row justify-content-center align-items-center">
     <mat-grid-list cols="6" rowHeight="2:1">
@@ -21,6 +35,7 @@
         <button mat-raised-button color="warn" (click)="cancelRegistration(child.id)">
           Kind abmelden
         </button>
+               
       </mat-grid-tile>
     </mat-grid-list>
   </div>

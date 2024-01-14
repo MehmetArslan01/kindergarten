@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { BackendService } from 'src/app/shared/backend.service';
 import { StoreService } from 'src/app/shared/store.service';
 
@@ -21,18 +21,24 @@ export class AddDataComponent implements OnInit {
     this.addChildForm = this.formbuilder.group({
       name: ['', [Validators.required, Validators.maxLength(50)]],
       kindergardenId: ['', [Validators.required]],
-      birthDate: [null, [Validators.required, Validators.min(this.calculateMinAge()), Validators.max(this.calculateMaxAge())]]
+      birthDate: [null, [Validators.required, this.dateValidator.bind(this)]]
     });
   }
 
-  calculateMinAge(): number {
-    const today = new Date();
-    return today.getFullYear() - 10; 
-  }
+  dateValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedDate = control.value;
+    if (selectedDate) {
+      const minDate = new Date();
+      minDate.setFullYear(minDate.getFullYear() - 10); // Minimum age is 10 years
+      const maxDate = new Date();
+      maxDate.setFullYear(maxDate.getFullYear() - 3); // Maximum age is 3 years
 
-  calculateMaxAge(): number {
-    const today = new Date();
-    return today.getFullYear() - 3; 
+      if (selectedDate < minDate || selectedDate > maxDate) {
+        return { invalidDate: true, message: 'Kind should be between 3 and 10 years old.' };
+      }
+    }
+
+    return null;
   }
 
   onSubmit() {

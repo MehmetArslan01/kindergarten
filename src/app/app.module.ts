@@ -21,14 +21,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
-
-
-
-
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -59,13 +55,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    MatTooltipModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatMenuModule,
     MatPaginatorModule
-
-
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

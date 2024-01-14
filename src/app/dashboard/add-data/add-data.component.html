@@ -16,29 +16,27 @@
     <h2>Ihr Kind anmelden!</h2>
   
     <mat-form-field appearance="fill" floatLabel="always">
-      <mat-label>Name</mat-label>
-      <input matInput placeholder="Name" formControlName="name">
+      <mat-label>Geben Sie den Namen des Kindes ein</mat-label>
+      <input matInput placeholder="Name" formControlName="name" matTooltip="Geben Sie hier den Namen Ihres Kindes ein, der Name darf maximal 50 Zeichen lang sein.">
       <mat-error *ngIf="addChildForm.get('name').hasError('required')">Bitte geben Sie einen Namen ein.</mat-error>
       <mat-error *ngIf="addChildForm.get('name').hasError('maxlength')">Der Name darf maximal 50 Zeichen lang sein.</mat-error>
     </mat-form-field>
   
-    <mat-form-field appearance="fill">
-      <mat-label>Geburtsdatum</mat-label>
-      <input matInput type="date" placeholder="Geburtsdatum" formControlName="birthDate">
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Geben Sie das Geburtsdatum des Kindes ein</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="birthDate" matTooltip="Geben Sie hier das Geburtsdatum Ihres Kindes ein. Ihr Kind darf muss zwischen 3 und 10 Jahren alt sein.">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="addChildForm.get('birthDate').hasError('required')">Geburtsdatum wird benötigt!</mat-error>
-      <mat-error *ngIf="addChildForm.get('birthDate').hasError('min')">
-        Das Kind darf frühestens im Jahr {{ calculateMinAge() + 1 }} geboren sein.
-      </mat-error>
-      <mat-error *ngIf="addChildForm.get('birthDate').hasError('max')">
-        Das Kind darf spätestens im Jahr {{ calculateMaxAge() }} geboren sein.
+      <mat-error *ngIf="addChildForm.get('birthDate').hasError('invalidDate')">
+        Das Kind muss zwischen 3 und 10 Jahre alt sein.
       </mat-error>
     </mat-form-field>
     
-    
-    
+
   
     <mat-form-field appearance="fill">
-        <mat-label>Kindergarten</mat-label>
+        <mat-label>Bitte wählen Sie einen Kindergarten aus</mat-label>
         <mat-select formControlName="kindergardenId">
           <mat-option value="" disabled>Bitte auswählen</mat-option>
           <mat-option *ngFor="let kindergarden of storeService.kindergardens" [value]="kindergarden.id">
@@ -49,7 +47,7 @@
       </mat-form-field>
       
   
-    <button mat-raised-button type="submit">Erfassen</button>
+<button mat-raised-button color="primary" type="submit">Erfassen</button>
   </form>
   
   

@@ -4,6 +4,7 @@ import { CHILDREN_PER_PAGE } from 'src/app/shared/constants';
 import { StoreService } from 'src/app/shared/store.service';
 import { MatPaginator } from '@angular/material/paginator';
 
+
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -13,11 +14,32 @@ export class DataComponent implements OnInit {
   @Input() currentPage!: number;
   @Output() selectPageEvent = new EventEmitter<number>();
   public page: number = 0;
+  public showToast = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public storeService: StoreService, private backendService: BackendService) {}
 
+  public showCancellationConfirmationFlag = false; // Änderung des Namens der Eigenschaft
+  public childIdForCancellation: string | null = null;
+
+  showCancellationConfirmation(childId: string) {
+    this.childIdForCancellation = childId;
+    this.showCancellationConfirmationFlag = true; // Änderung des Namens in der Funktion
+  }
+
+  cancelCancellation() {
+    this.showCancellationConfirmationFlag = false;
+    this.childIdForCancellation = null;
+  }
+
+  confirmChildCancellation() {
+    if (this.childIdForCancellation) {
+      // Hier deine spezifische Logik für die Abmeldung
+      this.showCancellationConfirmationFlag = false;
+      this.childIdForCancellation = null;
+    }
+  }
   ngOnInit(): void {
     this.backendService.getChildren(this.currentPage);
   }
@@ -57,5 +79,11 @@ export class DataComponent implements OnInit {
   public cancelRegistration(childId: string) {
     this.backendService.deleteChildData(childId, this.currentPage);
     this.backendService.getChildren(this.currentPage);
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 3000);
   }
+
+  
 }
