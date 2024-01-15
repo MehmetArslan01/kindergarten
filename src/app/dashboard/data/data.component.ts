@@ -20,12 +20,12 @@ export class DataComponent implements OnInit {
 
   constructor(public storeService: StoreService, private backendService: BackendService) {}
 
-  public showCancellationConfirmationFlag = false; // Änderung des Namens der Eigenschaft
+  public showCancellationConfirmationFlag = false; 
   public childIdForCancellation: string | null = null;
 
   showCancellationConfirmation(childId: string) {
     this.childIdForCancellation = childId;
-    this.showCancellationConfirmationFlag = true; // Änderung des Namens in der Funktion
+    this.showCancellationConfirmationFlag = true; 
   }
 
   cancelCancellation() {
@@ -35,7 +35,6 @@ export class DataComponent implements OnInit {
 
   confirmChildCancellation() {
     if (this.childIdForCancellation) {
-      // Hier deine spezifische Logik für die Abmeldung
       this.showCancellationConfirmationFlag = false;
       this.childIdForCancellation = null;
     }

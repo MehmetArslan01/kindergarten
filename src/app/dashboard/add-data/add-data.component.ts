@@ -29,9 +29,9 @@ export class AddDataComponent implements OnInit {
     const selectedDate = control.value;
     if (selectedDate) {
       const minDate = new Date();
-      minDate.setFullYear(minDate.getFullYear() - 10); // Minimum age is 10 years
+      minDate.setFullYear(minDate.getFullYear() - 10); 
       const maxDate = new Date();
-      maxDate.setFullYear(maxDate.getFullYear() - 3); // Maximum age is 3 years
+      maxDate.setFullYear(maxDate.getFullYear() - 3); 
 
       if (selectedDate < minDate || selectedDate > maxDate) {
         return { invalidDate: true, message: 'Kind should be between 3 and 10 years old.' };
