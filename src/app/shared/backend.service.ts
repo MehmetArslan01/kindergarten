@@ -31,20 +31,19 @@ export class BackendService {
     });
   }
 
-  public getChildren(page: number, childrenPerPage: number = CHILDREN_PER_PAGE, kindergardenId: number | null = null) {
+  public getChildren(page: number, childrenPerPage: number = CHILDREN_PER_PAGE, kindergardenId: number | null = null, sortField: string = 'name', sortOrder: string = 'asc') {
     this.storeService.isLoading = true;
     let url = `http://localhost:5000/childs?_expand=kindergarden&_page=${page}&_limit=${childrenPerPage}`;
     if (kindergardenId !== null) {
       url += `&kindergardenId=${encodeURIComponent(kindergardenId)}`;
     }
+    url += `&_sort=${sortField}&_order=${sortOrder}`;
     this.http.get<ChildResponse[]>(url, { observe: 'response' }).subscribe(data => {
       this.storeService.children = data.body!;
       this.storeService.childrenTotalCount = Number(data.headers.get('X-Total-Count'));
       this.storeService.isLoading = false;
     });
   }
-  
-  
 
   public addChildData(child: Child, page:  number) {
     this.http.post('http://localhost:5000/childs', child).subscribe(_ => {

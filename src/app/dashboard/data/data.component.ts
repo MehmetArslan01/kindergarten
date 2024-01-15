@@ -40,24 +40,13 @@ export class DataComponent implements OnInit {
       this.sortOrder = 'asc';
     }
   
-    this.storeService.children.sort((a, b) => {
-      const valueA = (a as any)[field];
-      const valueB = (b as any)[field];
-      const order = this.sortOrder === 'asc' ? 1 : -1;
-  
-      if (valueA < valueB) {
-        return -1 * order;
-      } else if (valueA > valueB) {
-        return 1 * order;
-      } else {
-        return 0;
-      }
-    });
+    this.backendService.getChildren(this.currentPage, CHILDREN_PER_PAGE, null, this.sortOptions.field, this.sortOrder);
   }
   
   public sortChildrenByRegistrationDate() {
     this.sortChildren('registrationDate');
   }
+  
 
  filterChildrenByKindergarten() {
     console.log('Filtering children by kindergarten...');
