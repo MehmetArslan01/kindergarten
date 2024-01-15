@@ -13,7 +13,26 @@
 </div>
 
 <div class="container">
+  <div class="row justify-content-center align-items-center">
+  <label for="kindergartenFilter">Filter nach Kindergarten:</label>
+  <select
+    id="kindergartenFilter"
+    [(ngModel)]="selectedKindergarten"
+    (change)="filterChildrenByKindergarten()"
+  >
+  <option value="alle">Alle</option>
+  <option *ngFor="let kindergarten of storeService.kindergardens" [value]="kindergarten.name">
+      {{ kindergarten.name }} - {{ kindergarten.address }}
+    </option>
+  </select>
+</div>
   <div class="mat-h4 mat-elevation-z2 row justify-content-center align-items-center">
+<!-- Beispiel-Button mit Click-Ereignis -->
+<button mat-raised-button color="primary" (click)="sortChildren('name')">Sortiere nach Name</button>
+<button mat-raised-button color="primary" (click)="sortChildren('kindergarden.name')">Sortiere nach Name</button>
+<button mat-button (click)="sortChildren('kindergarden.name')">Sort by Kindergarten</button>
+<button mat-button (click)="sortChildrenByRegistrationDate()">Sort by Registration Date</button>
+
     <mat-grid-list cols="6" rowHeight="2:1">
       <mat-grid-tile> Name </mat-grid-tile>
       <mat-grid-tile> Kindergarten </mat-grid-tile>

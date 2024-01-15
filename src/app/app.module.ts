@@ -25,8 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-
+import { KindergardenPageComponent} from "./kindergarden-page/kindergarden-page-component";
 
 
 @NgModule({
@@ -37,7 +36,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DataComponent,
     HeaderComponent,
     ButtonComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    KindergardenPageComponent
   ],
   imports: [
     BrowserModule,

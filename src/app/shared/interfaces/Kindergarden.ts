@@ -6,7 +6,11 @@ export interface Kindergarden {
     typ: Typ,
   }
 
-  export enum Typ {
-      privat = 1,
-      oeffentlich = 2,
-  }
+export class KindergardenClass implements Kindergarden{
+  constructor(public id: number, public name: string, public address: string, public betreiber: string, public typ:Typ) {}
+}
+
+export enum Typ {
+    privat = 1,
+    oeffentlich = 2,
+}

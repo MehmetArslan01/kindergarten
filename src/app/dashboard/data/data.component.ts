@@ -15,6 +15,12 @@ export class DataComponent implements OnInit {
   @Output() selectPageEvent = new EventEmitter<number>();
   public page: number = 0;
   public showToast = false;
+  public selectedKindergarten: string | null = null;
+  public sortOptions = {
+    field: 'name',
+    order: 'asc',
+  };
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -23,6 +29,53 @@ export class DataComponent implements OnInit {
   public showCancellationConfirmationFlag = false; 
   public childIdForCancellation: string | null = null;
 
+ public sortChildren(field: string) {
+  if (this.sortOptions.field === field) {
+    this.sortOptions.order = this.sortOptions.order === 'asc' ? 'desc' : 'asc';
+  } else {
+    this.sortOptions.field = field;
+    this.sortOptions.order = 'asc';
+  }
+
+  this.storeService.children.sort((a, b) => {
+    const valueA = (a as any)[field];
+    const valueB = (b as any)[field];
+    const order = this.sortOptions.order === 'asc' ? 1 : -1;
+
+    if (valueA < valueB) {
+      return -1 * order;
+    } else if (valueA > valueB) {
+      return 1 * order;
+    } else {
+      return 0;
+    }
+  });
+}
+  
+  public sortChildrenByRegistrationDate() {
+    this.sortChildren('registrationDate');
+  }
+
+ filterChildrenByKindergarten() {
+    console.log('Filtering children by kindergarten...');
+    if (this.selectedKindergarten && this.selectedKindergarten != "alle") {
+      const selectedKindergartenId = this.getKindergartenIdByName(this.selectedKindergarten);
+      if (selectedKindergartenId !== null) {
+        console.log('Selected Kindergarten Id:', selectedKindergartenId);
+        this.backendService.getChildren(this.currentPage, CHILDREN_PER_PAGE, selectedKindergartenId);
+      } else {
+        console.error(`Kindergarten "${this.selectedKindergarten}" not found.`);
+      }
+    } else {
+      console.log('Fetching all children...');
+      this.backendService.getChildren(this.currentPage);
+    }
+  }
+
+  private getKindergartenIdByName(kindergartenName: string): number | null {
+    const selectedKindergarten = this.storeService.kindergardens.find(kg => kg.name === kindergartenName);
+    return selectedKindergarten ? selectedKindergarten.id : null;
+  }
   showCancellationConfirmation(childId: string) {
     this.childIdForCancellation = childId;
     this.showCancellationConfirmationFlag = true; 

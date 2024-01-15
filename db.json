@@ -2,24 +2,6 @@
   "childs": [
     {
       "name": "test",
-      "kindergardenId": 1,
-      "birthDate": "2015-10-10",
-      "id": "PVlbGt7"
-    },
-    {
-      "name": "test",
-      "kindergardenId": 4,
-      "birthDate": "2017-06-20T22:00:00.000Z",
-      "id": "Hh39kqQ"
-    },
-    {
-      "name": "test",
-      "kindergardenId": 4,
-      "birthDate": "2017-06-14T22:00:00.000Z",
-      "id": "VNBLOR4"
-    },
-    {
-      "name": "test",
       "kindergardenId": 4,
       "birthDate": "2017-10-15T22:00:00.000Z",
       "id": "hUT_t64"
@@ -47,6 +29,12 @@
       "kindergardenId": 3,
       "birthDate": "2017-08-08T22:00:00.000Z",
       "id": "RtyvVic"
+    },
+    {
+      "name": "a",
+      "kindergardenId": 5,
+      "birthDate": "2017-02-06T23:00:00.000Z",
+      "id": "gclEA6d"
     }
   ],
   "kindergardens": [

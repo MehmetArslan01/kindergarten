@@ -1,0 +1,31 @@
+.container {
+  margin: 20px auto;
+
+  .mat-h4 {
+    background-color: #673ab7;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mat-elevation-z1 {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .show-more-button {
+    background-color: #673ab7;
+  }
+
+  .back-button {
+    background-color: #ffc107;
+    color: black;
+    margin-top: 10px;
+  }
+
+}
+
