@@ -38,7 +38,7 @@
       <mat-grid-tile> Adresse </mat-grid-tile>
       <mat-grid-tile> Alter </mat-grid-tile>
       <mat-grid-tile> Geburtsdatum </mat-grid-tile>
-      <mat-grid-tile> </mat-grid-tile>
+      <mat-grid-tile> Anmeldedatum </mat-grid-tile>
     </mat-grid-list>
   </div>
 
@@ -49,6 +49,8 @@
       <mat-grid-tile> {{child.kindergarden.address}} </mat-grid-tile>
       <mat-grid-tile> {{getAge(child.birthDate)}} </mat-grid-tile>
       <mat-grid-tile> {{child.birthDate | date:'longDate'}} </mat-grid-tile>
+      <mat-grid-tile> {{child.registrationDate | date:'longDate'}} </mat-grid-tile>
+
       <mat-grid-tile>
         <button mat-raised-button color="warn" (click)="cancelRegistration(child.id)">
           Kind abmelden

@@ -35,6 +35,12 @@
       "kindergardenId": 5,
       "birthDate": "2017-02-06T23:00:00.000Z",
       "id": "gclEA6d"
+    },
+    {
+      "name": "test",
+      "kindergardenId": 2,
+      "birthDate": "2017-02-16T23:00:00.000Z",
+      "id": "w2obncP"
     }
   ],
   "kindergardens": [
