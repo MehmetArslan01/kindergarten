@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center ">
+<div class="d-flex justify-content-center align-items-center p-4">
   <div *ngIf="showToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
       <strong class="mr-auto">Erfolgreich </strong>
@@ -12,45 +12,61 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-  <label for="kindergartenFilter">Filter nach Kindergarten:</label>
-  <select
-    id="kindergartenFilter"
-    [(ngModel)]="selectedKindergarten"
-    (change)="filterChildrenByKindergarten()"
-  >
-  <option value="alle">Alle</option>
-  <option *ngFor="let kindergarten of storeService.kindergardens" [value]="kindergarten.name">
-      {{ kindergarten.name }} - {{ kindergarten.address }}
-    </option>
-  </select>
-</div>
-  <div class="mat-h4 mat-elevation-z2 row justify-content-center align-items-center">
-<!-- Beispiel-Button mit Click-Ereignis -->
-<button mat-raised-button color="primary" (click)="sortChildren('name')">Sortiere nach Name</button>
-<button mat-button (click)="sortChildren('kindergarden.name')">Sort by Kindergarten</button>
-<button mat-button (click)="sortChildrenByRegistrationDate()">Sort by Registration Date</button>
-
-    <mat-grid-list cols="6" rowHeight="2:1">
-      <mat-grid-tile> Name </mat-grid-tile>
-      <mat-grid-tile> Kindergarten </mat-grid-tile>
-      <mat-grid-tile> Adresse </mat-grid-tile>
-      <mat-grid-tile> Alter </mat-grid-tile>
-      <mat-grid-tile> Geburtsdatum </mat-grid-tile>
-      <mat-grid-tile> Anmeldedatum </mat-grid-tile>
-    </mat-grid-list>
+<div class="container p-4">
+  <div class="row justify-content-center align-items-center mb-4">
+    <label for="kindergartenFilter">Filter nach Kindergarten:</label>
+    <select
+      id="kindergartenFilter"
+      [(ngModel)]="selectedKindergarten"
+      (change)="filterChildrenByKindergarten()"
+      class="form-control"
+    >
+      <option value="alle">Alle</option>
+      <option *ngFor="let kindergarten of storeService.kindergardens" [value]="kindergarten.name">
+        {{ kindergarten.name }} - {{ kindergarten.address }}
+      </option>
+    </select>
   </div>
 
+  <div class="mat-h4 mat-elevation-z2 row justify-content-center align-items-center mb-4">
+
+    <mat-grid-list cols="7" rowHeight="2:1" class="mt-4">
+      <mat-grid-tile class="sortable-header" (click)="sortChildren('name')">
+        <div class="header-content">
+          Name
+          <mat-icon>sort</mat-icon>
+        </div>
+      </mat-grid-tile>      
+      <mat-grid-tile class="sortable-header" (click)="sortChildren('kindergarden.name')">
+        <div class="header-content">
+          Kindergarten
+          <mat-icon>sort</mat-icon>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>Adresse</mat-grid-tile>
+      <mat-grid-tile>Alter</mat-grid-tile>
+      <mat-grid-tile>Geburtsdatum</mat-grid-tile>
+      <mat-grid-tile class="sortable-header" (click)="sortChildrenByRegistrationDate()">
+        <div class="header-content">
+          Anmeldedatum
+          <mat-icon>sort</mat-icon>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  
+
   <div *ngFor="let child of storeService.children" class="mat-elevation-z1 row justify-content-center align-items-center">
-    <mat-grid-list cols="6" rowHeight="2:1">
+    <mat-grid-list cols="7" rowHeight="2:1">
       <mat-grid-tile> {{child.name}} </mat-grid-tile>
       <mat-grid-tile> {{child.kindergarden.name}} </mat-grid-tile>
       <mat-grid-tile> {{child.kindergarden.address}} </mat-grid-tile>
       <mat-grid-tile> {{getAge(child.birthDate)}} </mat-grid-tile>
       <mat-grid-tile> {{child.birthDate | date:'longDate'}} </mat-grid-tile>
       <mat-grid-tile> {{child.registrationDate | date:'longDate'}} </mat-grid-tile>
-
+  
+  
       <mat-grid-tile>
         <button mat-raised-button color="warn" (click)="cancelRegistration(child.id)">
           Kind abmelden
@@ -59,7 +75,6 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-
   <mat-paginator
     [length]="storeService.childrenTotalCount"
     [pageSize]="2"

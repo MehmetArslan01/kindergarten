@@ -43,6 +43,7 @@ export class AddDataComponent implements OnInit {
 
   onSubmit() {
     if (this.addChildForm.valid) {
+      this.addChildForm.value.registrationDate = new Date(), 
       this.backendService.addChildData(this.addChildForm.value, this.currentPage);
       this.showToast = true;
       setTimeout(() => {

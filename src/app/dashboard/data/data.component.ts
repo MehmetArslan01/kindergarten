@@ -21,6 +21,9 @@ export class DataComponent implements OnInit {
     order: 'asc',
   };
 
+  sortColumn: string = '';
+  sortOrder: string = 'asc';
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -29,28 +32,28 @@ export class DataComponent implements OnInit {
   public showCancellationConfirmationFlag = false; 
   public childIdForCancellation: string | null = null;
 
- public sortChildren(field: string) {
-  if (this.sortOptions.field === field) {
-    this.sortOptions.order = this.sortOptions.order === 'asc' ? 'desc' : 'asc';
-  } else {
-    this.sortOptions.field = field;
-    this.sortOptions.order = 'asc';
-  }
-
-  this.storeService.children.sort((a, b) => {
-    const valueA = (a as any)[field];
-    const valueB = (b as any)[field];
-    const order = this.sortOptions.order === 'asc' ? 1 : -1;
-
-    if (valueA < valueB) {
-      return -1 * order;
-    } else if (valueA > valueB) {
-      return 1 * order;
+  public sortChildren(field: string) {
+    if (this.sortOptions.field === field) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
     } else {
-      return 0;
+      this.sortOptions.field = field;
+      this.sortOrder = 'asc';
     }
-  });
-}
+  
+    this.storeService.children.sort((a, b) => {
+      const valueA = (a as any)[field];
+      const valueB = (b as any)[field];
+      const order = this.sortOrder === 'asc' ? 1 : -1;
+  
+      if (valueA < valueB) {
+        return -1 * order;
+      } else if (valueA > valueB) {
+        return 1 * order;
+      } else {
+        return 0;
+      }
+    });
+  }
   
   public sortChildrenByRegistrationDate() {
     this.sortChildren('registrationDate');

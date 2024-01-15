@@ -26,6 +26,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { KindergardenPageComponent} from "./kindergarden-page/kindergarden-page-component";
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+
 
 
 @NgModule({
@@ -52,6 +55,7 @@ import { KindergardenPageComponent} from "./kindergarden-page/kindergarden-page-
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    MatTableModule,
     MatIconModule,
     MatGridListModule,
     MatCardModule,
@@ -59,6 +63,7 @@ import { KindergardenPageComponent} from "./kindergarden-page/kindergarden-page-
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
+    MatSortModule,
     MatPaginatorModule
   ],
   providers: [],
